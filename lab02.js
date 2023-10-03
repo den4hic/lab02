@@ -21,13 +21,15 @@ function task1(users, additionalUsers) {
 
     users.forEach(user => {
         const newUser = {
-            id: id++,
+            id: user.id.name + user.id.value,
             gender: user.gender,
             title: user.name.title,
             full_name: user.name.first + user.name.second,
             city: user.location.city,
             state: user.location.state,
             country: user.location.country,
+            course: courses[Math.floor(Math.random() * courses.length)],
+            favorite: true,
             postcode: user.location.postcode,
             coordinates: user.location.coordinates,
             timezone: user.location.timezone,
@@ -42,9 +44,15 @@ function task1(users, additionalUsers) {
         newUsers.push(newUser)
     });
 
-    console.log(newUsers)
+    additionalUsers.forEach(user => {
+        if(!newUsers.find(newUser => newUser.id === user.id)) {
+            newUsers.push(user)
+        }
+    });
+
+
     return newUsers
 }
 
-// console.log(randomUserMock)
+// console.log(additionalUsers)
 task1(randomUserMock, additionalUsers);
